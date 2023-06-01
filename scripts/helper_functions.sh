@@ -31,7 +31,8 @@ function get_setup_params_from_configs_json
     echo $json
     echo "-----End JSON"
     
-    echo jq -r .fileServerProfile.type $configs_json_path
+    FST=$(jq -r .fileServerProfile.type $configs_json_path)
+    echo "${FST}"
     
     export moodleVersion=$(echo $json | jq -r .moodleProfile.version)
     export glusterNode=$(echo $json | jq -r .fileServerProfile.glusterVmName)
