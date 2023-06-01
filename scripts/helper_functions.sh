@@ -31,8 +31,8 @@ function get_setup_params_from_configs_json
     echo $json
     echo "-----End JSON"
     
-    local FST=$(echo $json | jq --raw-output .fileServerProfile.type)
-    echo $FST
+    local FST=$(echo $json | jq -r '.fileServerProfile.type')
+    echo "The file server type is $FST"
     
     export moodleVersion=$(echo $json | jq -r .moodleProfile.version)
     export glusterNode=$(echo $json | jq -r .fileServerProfile.glusterVmName)
