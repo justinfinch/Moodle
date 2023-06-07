@@ -478,7 +478,7 @@ EOF
    PhpIni=/etc/php/${PhpVer}/fpm/php.ini
    sed -i "s/memory_limit.*/memory_limit = 512M/" $PhpIni
    sed -i "s/max_execution_time.*/max_execution_time = 18000/" $PhpIni
-   sed -i "s/max_input_vars.*/max_input_vars = 100000/" $PhpIni
+   sed -i "s/;max_input_vars.*/max_input_vars = 100000/" $PhpIni
    sed -i "s/max_input_time.*/max_input_time = 600/" $PhpIni
    sed -i "s/upload_max_filesize.*/upload_max_filesize = 1024M/" $PhpIni
    sed -i "s/post_max_size.*/post_max_size = 1056M/" $PhpIni
@@ -490,6 +490,21 @@ EOF
    sed -i "s/;opcache.memory_consumption.*/opcache.memory_consumption = 256/" $PhpIni
    sed -i "s/;opcache.max_accelerated_files.*/opcache.max_accelerated_files = 8000/" $PhpIni
 
+   PhpCliIni=/etc/php/${PhpVer}/cli/php.ini
+   sed -i "s/memory_limit.*/memory_limit = 512M/" $PhpCliIni
+   sed -i "s/max_execution_time.*/max_execution_time = 18000/" $PhpCliIni
+   sed -i "s/;max_input_vars.*/max_input_vars = 100000/" $PhpCliIni
+   sed -i "s/max_input_time.*/max_input_time = 600/" $PhpCliIni
+   sed -i "s/upload_max_filesize.*/upload_max_filesize = 1024M/" $PhpCliIni
+   sed -i "s/post_max_size.*/post_max_size = 1056M/" $PhpCliIni
+   sed -i "s/;opcache.use_cwd.*/opcache.use_cwd = 1/" $PhpCliIni
+   sed -i "s/;opcache.validate_timestamps.*/opcache.validate_timestamps = 1/" $PhpCliIni
+   sed -i "s/;opcache.save_comments.*/opcache.save_comments = 1/" $PhpCliIni
+   sed -i "s/;opcache.enable_file_override.*/opcache.enable_file_override = 0/" $PhpCliIni
+   sed -i "s/;opcache.enable.*/opcache.enable = 1/" $PhpCliIni
+   sed -i "s/;opcache.memory_consumption.*/opcache.memory_consumption = 256/" $PhpCliIni
+   sed -i "s/;opcache.max_accelerated_files.*/opcache.max_accelerated_files = 8000/" $PhpCliIni
+
    # fpm config - overload this 
    cat <<EOF > /etc/php/${PhpVer}/fpm/pool.d/www.conf
 [www]
@@ -500,7 +515,7 @@ listen.owner = www-data
 listen.group = www-data
 pm = dynamic
 pm.max_children = 3000
-pm.start_servers = 20 
+pm.start_servers = 22 
 pm.min_spare_servers = 22 
 pm.max_spare_servers = 30 
 EOF
