@@ -96,7 +96,6 @@ check_fileServerType_param $fileServerType
     graphviz \
     aspell \
     php$phpVersion-soap \
-    php$phpVersion-json \
     php$phpVersion-redis \
     php$phpVersion-bcmath \
     php$phpVersion-gd \
